@@ -1,5 +1,6 @@
 import os
 import tkinter
+from dotenv import load_dotenv
 from tkinter import messagebox, Tk, Label, Entry, Button
 from geopy.geocoders import Nominatim
 from timezonefinder import TimezoneFinder
@@ -7,7 +8,7 @@ from datetime import datetime
 import requests
 import pytz
 
-
+load_dotenv()
 def get_weather():
     try:
         city_field = textfield.get()
@@ -24,7 +25,7 @@ def get_weather():
         current_time = local_time.strftime("%I:%M %p")
         clock.config(text="LOCAL TIME")
 
-        api_key= os.getenv("API_KEY")
+        api_key = os.getenv("API_KEY")
         api = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lng}&appid={api_key}"
         json_data = requests.get(api).json()
         condition_data = json_data["weather"][0]["main"]
