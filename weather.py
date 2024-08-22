@@ -1,3 +1,4 @@
+import os
 import tkinter
 from tkinter import messagebox, Tk, Label, Entry, Button
 from geopy.geocoders import Nominatim
@@ -23,7 +24,7 @@ def get_weather():
         current_time = local_time.strftime("%I:%M %p")
         clock.config(text="LOCAL TIME")
 
-        api_key="enter your api key"
+        api_key= os.getenv("API_KEY")
         api = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lng}&appid={api_key}"
         json_data = requests.get(api).json()
         condition_data = json_data["weather"][0]["main"]
